@@ -22,199 +22,75 @@
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       font-size: 32px;
     }
-    .reveal .slides {
-      text-align: center;
-    }
-    .reveal .slides section {
-      padding: 20px 40px;
-    }
-    .reveal h1, .reveal h2, .reveal h3 {
-      text-transform: none;
-      font-weight: 600;
-    }
+    .reveal .slides { text-align: center; }
+    .reveal .slides section { padding: 20px 40px; }
+    .reveal h1, .reveal h2, .reveal h3 { text-transform: none; font-weight: 600; }
     .reveal h1 { font-size: 1.8em; margin-bottom: 0.3em; }
     .reveal h2 { font-size: 1.3em; margin-bottom: 0.4em; }
     .reveal h3 { font-size: 1em; color: var(--accent); }
     .reveal p { margin: 0.4em 0; }
-    .reveal .subtitle {
-      font-size: 0.6em;
-      color: #888;
-      margin-top: -0.3em;
-    }
-    .reveal table {
-      margin: 0.5em auto;
-      font-size: 0.55em;
-      border-collapse: collapse;
-    }
+    .reveal .subtitle { font-size: 0.6em; color: #888; margin-top: -0.3em; }
+    .reveal table { margin: 0.5em auto; font-size: 0.55em; border-collapse: collapse; }
     .reveal table th {
       background: rgba(110, 231, 183, 0.15);
       color: var(--accent);
       padding: 0.4em 0.6em;
       border-bottom: 2px solid var(--accent);
     }
-    .reveal table td {
-      padding: 0.35em 0.6em;
-      border-bottom: 1px solid #333;
-    }
+    .reveal table td { padding: 0.35em 0.6em; border-bottom: 1px solid #333; }
     .reveal .highlight { color: var(--accent); font-weight: 600; }
     .reveal .warning { color: var(--warning); }
     .reveal .danger { color: var(--danger); }
-    .reveal .big-number {
-      font-size: 2.2em;
-      font-weight: 700;
-      color: var(--accent);
-      line-height: 1.1;
-    }
-    .reveal .big-number .unit {
-      font-size: 0.4em;
-      color: #888;
-    }
-    .reveal .comparison {
-      display: flex;
-      justify-content: center;
-      gap: 2em;
-      margin-top: 0.6em;
-    }
+    .reveal .big-number { font-size: 2.2em; font-weight: 700; color: var(--accent); line-height: 1.1; }
+    .reveal .big-number .unit { font-size: 0.4em; color: #888; }
+    .reveal .comparison { display: flex; justify-content: center; gap: 2em; margin-top: 0.6em; }
     .reveal .comparison > div { text-align: center; }
-    .reveal .comparison .label {
-      font-size: 0.6em;
-      color: #888;
-      margin-bottom: 0.2em;
-    }
-    .reveal .fee-stack {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.25em;
-      margin: 0.6em auto;
-      max-width: 520px;
-    }
+    .reveal .comparison .label { font-size: 0.6em; color: #888; margin-bottom: 0.2em; }
+    .reveal .fee-stack { display: flex; flex-direction: column; align-items: center; gap: 0.25em; margin: 0.6em auto; max-width: 520px; }
     .reveal .fee-layer {
-      width: 100%;
-      padding: 0.5em 0.8em;
-      border-radius: 6px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.75em;
+      width: 100%; padding: 0.5em 0.8em; border-radius: 6px;
+      display: flex; justify-content: space-between; align-items: center; font-size: 0.75em;
     }
-    .reveal .fee-layer.interchange {
-      background: linear-gradient(90deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.1));
-      border-left: 3px solid var(--danger);
-    }
-    .reveal .fee-layer.assessments {
-      background: linear-gradient(90deg, rgba(251, 191, 36, 0.2), rgba(251, 191, 36, 0.1));
-      border-left: 3px solid var(--warning);
-    }
-    .reveal .fee-layer.markup {
-      background: linear-gradient(90deg, rgba(110, 231, 183, 0.2), rgba(110, 231, 183, 0.1));
-      border-left: 3px solid var(--accent);
-    }
+    .reveal .fee-layer.interchange { background: linear-gradient(90deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.1)); border-left: 3px solid var(--danger); }
+    .reveal .fee-layer.assessments { background: linear-gradient(90deg, rgba(251, 191, 36, 0.2), rgba(251, 191, 36, 0.1)); border-left: 3px solid var(--warning); }
+    .reveal .fee-layer.markup { background: linear-gradient(90deg, rgba(110, 231, 183, 0.2), rgba(110, 231, 183, 0.1)); border-left: 3px solid var(--accent); }
     .reveal .fee-layer .name { font-weight: 600; }
     .reveal .fee-layer .amount { font-size: 1.1em; font-weight: 700; }
     .reveal .fee-layer .locked { font-size: 0.7em; opacity: 0.7; }
     .reveal .level-card {
-      background: rgba(255,255,255,0.05);
-      border-radius: 10px;
-      padding: 0.7em 1em;
-      margin: 0.3em auto;
-      max-width: 580px;
-      text-align: left;
-      font-size: 0.85em;
+      background: rgba(255,255,255,0.05); border-radius: 10px; padding: 0.7em 1em;
+      margin: 0.3em auto; max-width: 580px; text-align: left; font-size: 0.85em;
     }
-    .reveal .level-card h3 {
-      margin: 0 0 0.3em 0;
-      font-size: 0.95em;
-    }
-    .reveal .level-card p {
-      margin: 0.2em 0;
-      font-size: 0.85em;
-      color: #aaa;
-    }
-    .reveal .level-card .metrics {
-      display: flex;
-      gap: 1.5em;
-      margin-top: 0.5em;
-      font-size: 0.8em;
-    }
+    .reveal .level-card h3 { margin: 0 0 0.3em 0; font-size: 0.95em; }
+    .reveal .level-card p { margin: 0.2em 0; font-size: 0.85em; color: #aaa; }
+    .reveal .level-card .metrics { display: flex; gap: 1.5em; margin-top: 0.5em; font-size: 0.8em; }
     .reveal .level-card .metric { text-align: center; }
-    .reveal .level-card .metric .value {
-      font-size: 1.2em;
-      font-weight: 700;
-      color: var(--accent);
-    }
-    .reveal .level-card .metric .label {
-      font-size: 0.75em;
-      color: #888;
-    }
-    .reveal ul {
-      list-style: none;
-      padding-left: 0;
-      font-size: 0.85em;
-    }
-    .reveal ul li {
-      margin: 0.3em 0;
-      padding-left: 1.3em;
-      position: relative;
-    }
-    .reveal ul li::before {
-      content: "→";
-      position: absolute;
-      left: 0;
-      color: var(--accent);
-    }
-    .reveal .level-card ul {
-      font-size: 0.9em;
-      margin: 0.3em 0;
-    }
-    .reveal .level-card ul li {
-      margin: 0.15em 0;
-    }
-    .reveal .rec {
-      background: rgba(110, 231, 183, 0.15);
-      border: 1px solid var(--accent);
-      border-radius: 4px;
-      padding: 0.2em 0.5em;
-      font-size: 0.7em;
-      margin-left: 0.5em;
-    }
-    .reveal .small {
-      font-size: 0.6em;
-      color: #888;
-    }
-    .reveal .chart-bar {
-      display: flex;
-      align-items: center;
-      margin: 0.3em 0;
-      font-size: 0.65em;
-    }
-    .reveal .chart-bar .label {
-      width: 50px;
-      text-align: right;
-      padding-right: 0.8em;
-      color: #888;
-    }
+    .reveal .level-card .metric .value { font-size: 1.2em; font-weight: 700; color: var(--accent); }
+    .reveal .level-card .metric .label { font-size: 0.75em; color: #888; }
+    .reveal ul { list-style: none; padding-left: 0; font-size: 0.85em; }
+    .reveal ul li { margin: 0.3em 0; padding-left: 1.3em; position: relative; }
+    .reveal ul li::before { content: "→"; position: absolute; left: 0; color: var(--accent); }
+    .reveal .level-card ul { font-size: 0.9em; margin: 0.3em 0; }
+    .reveal .level-card ul li { margin: 0.15em 0; }
+    .reveal .rec { background: rgba(110, 231, 183, 0.15); border: 1px solid var(--accent); border-radius: 4px; padding: 0.2em 0.5em; font-size: 0.7em; margin-left: 0.5em; }
+    .reveal .small { font-size: 0.6em; color: #888; }
+    .reveal .chart-bar { display: flex; align-items: center; margin: 0.3em 0; font-size: 0.65em; }
+    .reveal .chart-bar .label { width: 50px; text-align: right; padding-right: 0.8em; color: #888; }
     .reveal .chart-bar .bar {
-      height: 22px;
-      background: linear-gradient(90deg, var(--accent), var(--accent-dim));
-      border-radius: 3px;
-      display: flex;
-      align-items: center;
-      padding-left: 0.6em;
-      font-weight: 600;
-      min-width: 40px;
+      height: 22px; background: linear-gradient(90deg, var(--accent), var(--accent-dim));
+      border-radius: 3px; display: flex; align-items: center; padding-left: 0.6em; font-weight: 600; min-width: 40px;
     }
     .xivara-logo { font-weight: 700; letter-spacing: -0.02em; }
     .xivara-logo span { color: var(--accent); }
     .reveal .callout-box {
-      background: rgba(251, 191, 36, 0.12);
-      border: 1px solid var(--warning);
-      border-radius: 8px;
-      padding: 0.8em 1em;
-      margin: 0.5em auto;
-      max-width: 560px;
-      font-size: 0.85em;
+      background: rgba(251, 191, 36, 0.12); border: 1px solid var(--warning);
+      border-radius: 8px; padding: 0.8em 1em; margin: 0.5em auto; max-width: 560px; font-size: 0.85em;
     }
+    .reveal .assumptions {
+      background: rgba(255,255,255,0.05); border-radius: 8px; padding: 0.6em 1em;
+      margin: 0.5em auto; max-width: 400px; font-size: 0.7em; text-align: left;
+    }
+    .reveal .assumptions .title { color: var(--accent); font-weight: 600; margin-bottom: 0.3em; }
   </style>
 </head>
 <body>
@@ -409,7 +285,7 @@
           </ul>
           <div class="metrics">
             <div class="metric">
-              <div class="value">$40–100</div>
+              <div class="value">$50–130</div>
               <div class="label">/loc/mo</div>
             </div>
             <div class="metric">
@@ -436,7 +312,7 @@
           </ul>
           <div class="metrics">
             <div class="metric">
-              <div class="value">$160–280</div>
+              <div class="value">$200–360</div>
               <div class="label">/loc/mo</div>
             </div>
             <div class="metric">
@@ -463,7 +339,7 @@
           </ul>
           <div class="metrics">
             <div class="metric">
-              <div class="value">$280–360</div>
+              <div class="value">$360–460</div>
               <div class="label">/loc/mo</div>
             </div>
             <div class="metric">
@@ -490,7 +366,7 @@
           </ul>
           <div class="metrics">
             <div class="metric">
-              <div class="value">$360–400</div>
+              <div class="value">$460–510</div>
               <div class="label">/loc/mo</div>
             </div>
             <div class="metric">
@@ -508,41 +384,50 @@
       <!-- Revenue Comparison -->
       <section>
         <h2>Revenue by Level</h2>
-        <p class="small">Per location @ $100K/mo volume</p>
-        <div style="max-width: 480px; margin: 0.6em auto;">
+        <div class="assumptions">
+          <div class="title">Assumptions</div>
+          $1.8M/year per location · 85% on cards · $127.5K/mo volume
+        </div>
+        <div style="max-width: 480px; margin: 0.5em auto;">
           <div class="chart-bar">
             <div class="label">L1</div>
             <div class="bar" style="width: 40px; background: #444;">$0</div>
           </div>
           <div class="chart-bar">
             <div class="label">L2</div>
-            <div class="bar" style="width: 80px;">$40–100</div>
+            <div class="bar" style="width: 80px;">$50–130</div>
           </div>
           <div class="chart-bar">
             <div class="label">L3</div>
-            <div class="bar" style="width: 180px;">$160–280</div>
+            <div class="bar" style="width: 200px;">$200–360</div>
           </div>
           <div class="chart-bar">
             <div class="label">L4</div>
-            <div class="bar" style="width: 260px;">$280–360</div>
+            <div class="bar" style="width: 280px;">$360–460</div>
           </div>
           <div class="chart-bar">
             <div class="label">L5</div>
-            <div class="bar" style="width: 300px;">$360–400</div>
+            <div class="bar" style="width: 320px;">$460–510</div>
           </div>
         </div>
+        <p class="small">Per location / month</p>
       </section>
 
-      <!-- At Scale -->
+      <!-- At Scale - Annual -->
       <section>
-        <h2>At Scale: 200 Locations</h2>
+        <h2>Annual Revenue at Scale</h2>
+        <div class="assumptions">
+          <div class="title">Assumptions</div>
+          $1.8M/year per location · 85% on cards · $127.5K/mo volume
+        </div>
         <table>
           <thead>
             <tr>
               <th>Level</th>
-              <th>Monthly</th>
-              <th>Annual</th>
-              <th>% of Total*</th>
+              <th>1 Location</th>
+              <th>100 Locations</th>
+              <th>250 Locations</th>
+              <th>500 Locations</th>
             </tr>
           </thead>
           <tbody>
@@ -550,35 +435,39 @@
               <td>L1: Gateway</td>
               <td>$0</td>
               <td>$0</td>
-              <td>0%</td>
+              <td>$0</td>
+              <td>$0</td>
             </tr>
             <tr>
               <td>L2: ISO</td>
-              <td>$8K–20K</td>
-              <td>$96K–240K</td>
-              <td>12–25%</td>
+              <td>$0.6–1.5K</td>
+              <td>$61–153K</td>
+              <td>$153–382K</td>
+              <td>$306–765K</td>
             </tr>
             <tr style="background: rgba(110, 231, 183, 0.1);">
               <td>L3: Embedded</td>
-              <td>$32K–56K</td>
-              <td>$384K–672K</td>
-              <td>35–48%</td>
+              <td>$2.4–4.3K</td>
+              <td>$245–428K</td>
+              <td>$612K–1.07M</td>
+              <td>$1.22–2.14M</td>
             </tr>
             <tr>
               <td>L4: PFaaS</td>
-              <td>$56K–72K</td>
-              <td>$672K–864K</td>
-              <td>48–55%</td>
+              <td>$4.3–5.5K</td>
+              <td>$428–551K</td>
+              <td>$1.07–1.38M</td>
+              <td>$2.14–2.75M</td>
             </tr>
             <tr>
               <td>L5: PayFac</td>
-              <td>$72K–80K</td>
-              <td>$864K–960K</td>
-              <td>55–57%</td>
+              <td>$5.5–6.1K</td>
+              <td>$551–612K</td>
+              <td>$1.38–1.53M</td>
+              <td>$2.75–3.06M</td>
             </tr>
           </tbody>
         </table>
-        <p class="small" style="margin-top: 0.5em;">*With $300/mo SaaS fee</p>
       </section>
 
       <!-- Compliance Tradeoff -->
@@ -646,8 +535,8 @@
         <ul>
           <li><span class="danger">~85%</span> goes to banks & networks (locked)</li>
           <li><span class="highlight">~15%</span> is processor markup (splittable)</li>
-          <li>Realistic: <span class="highlight">$160–400/location/month</span></li>
-          <li>200 locations: <span class="highlight">$380K–960K/year</span></li>
+          <li>Per location: <span class="highlight">$200–510/month</span> (L3–L5)</li>
+          <li>At 500 locations: <span class="highlight">$1.2M–3.1M/year</span></li>
         </ul>
         <p class="fragment" style="margin-top: 1em;">
           <span class="rec">Start at L3. Architect for L4.</span>
