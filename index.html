@@ -1,0 +1,675 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Processing Economics | XiVara</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reset.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/theme/black.css">
+  <style>
+    :root {
+      --r-background-color: #0a0a0f;
+      --r-main-color: #e0e0e0;
+      --r-heading-color: #ffffff;
+      --r-link-color: #6ee7b7;
+      --accent: #6ee7b7;
+      --accent-dim: #34d399;
+      --warning: #fbbf24;
+      --danger: #ef4444;
+    }
+    .reveal {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    .reveal h1, .reveal h2, .reveal h3 {
+      text-transform: none;
+      font-weight: 600;
+    }
+    .reveal h1 { font-size: 2.2em; }
+    .reveal h2 { font-size: 1.6em; }
+    .reveal h3 { font-size: 1.2em; color: var(--accent); }
+    .reveal .subtitle {
+      font-size: 0.6em;
+      color: #888;
+      margin-top: -0.5em;
+    }
+    .reveal table {
+      margin: 0 auto;
+      font-size: 0.7em;
+      border-collapse: collapse;
+    }
+    .reveal table th {
+      background: rgba(110, 231, 183, 0.15);
+      color: var(--accent);
+      padding: 0.6em 1em;
+      border-bottom: 2px solid var(--accent);
+    }
+    .reveal table td {
+      padding: 0.5em 1em;
+      border-bottom: 1px solid #333;
+    }
+    .reveal .highlight {
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .reveal .warning {
+      color: var(--warning);
+    }
+    .reveal .danger {
+      color: var(--danger);
+    }
+    .reveal .big-number {
+      font-size: 3em;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1.1;
+    }
+    .reveal .big-number .unit {
+      font-size: 0.4em;
+      color: #888;
+    }
+    .reveal .comparison {
+      display: flex;
+      justify-content: center;
+      gap: 3em;
+      margin-top: 1em;
+    }
+    .reveal .comparison > div {
+      text-align: center;
+    }
+    .reveal .comparison .label {
+      font-size: 0.7em;
+      color: #888;
+      margin-bottom: 0.3em;
+    }
+    .reveal .fee-stack {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.3em;
+      margin: 1em auto;
+      max-width: 600px;
+    }
+    .reveal .fee-layer {
+      width: 100%;
+      padding: 0.8em 1.2em;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .reveal .fee-layer.interchange {
+      background: linear-gradient(90deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.1));
+      border-left: 4px solid var(--danger);
+    }
+    .reveal .fee-layer.assessments {
+      background: linear-gradient(90deg, rgba(251, 191, 36, 0.2), rgba(251, 191, 36, 0.1));
+      border-left: 4px solid var(--warning);
+    }
+    .reveal .fee-layer.markup {
+      background: linear-gradient(90deg, rgba(110, 231, 183, 0.2), rgba(110, 231, 183, 0.1));
+      border-left: 4px solid var(--accent);
+    }
+    .reveal .fee-layer .name {
+      font-weight: 600;
+    }
+    .reveal .fee-layer .amount {
+      font-size: 1.1em;
+      font-weight: 700;
+    }
+    .reveal .fee-layer .locked {
+      font-size: 0.7em;
+      opacity: 0.7;
+    }
+    .reveal .level-card {
+      background: rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 1.2em;
+      margin: 0.5em auto;
+      max-width: 700px;
+      text-align: left;
+    }
+    .reveal .level-card h3 {
+      margin: 0 0 0.5em 0;
+      font-size: 1em;
+    }
+    .reveal .level-card .metrics {
+      display: flex;
+      gap: 2em;
+      margin-top: 0.8em;
+      font-size: 0.8em;
+    }
+    .reveal .level-card .metric {
+      text-align: center;
+    }
+    .reveal .level-card .metric .value {
+      font-size: 1.4em;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .reveal .level-card .metric .label {
+      font-size: 0.85em;
+      color: #888;
+    }
+    .reveal ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .reveal ul li {
+      margin: 0.4em 0;
+      padding-left: 1.5em;
+      position: relative;
+    }
+    .reveal ul li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+    .reveal .fragment.semi-fade-out.visible {
+      opacity: 0.3;
+    }
+    .reveal .rec {
+      background: rgba(110, 231, 183, 0.15);
+      border: 2px solid var(--accent);
+      border-radius: 8px;
+      padding: 0.5em 1em;
+      display: inline-block;
+      font-size: 0.8em;
+    }
+    .reveal .small {
+      font-size: 0.7em;
+      color: #888;
+    }
+    .reveal .chart-bar {
+      display: flex;
+      align-items: center;
+      margin: 0.5em 0;
+      font-size: 0.8em;
+    }
+    .reveal .chart-bar .label {
+      width: 80px;
+      text-align: right;
+      padding-right: 1em;
+      color: #888;
+    }
+    .reveal .chart-bar .bar {
+      height: 28px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-dim));
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      padding-left: 0.8em;
+      font-weight: 600;
+      min-width: 50px;
+    }
+    .xivara-logo {
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .xivara-logo span {
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      
+      <!-- Title -->
+      <section>
+        <h1>Payment Processing Economics</h1>
+        <p class="subtitle">Understanding what's really on the table</p>
+        <p style="margin-top: 2em; font-size: 0.8em; color: #666;">
+          <span class="xivara-logo">Xi<span>Vara</span></span> · Executive Briefing
+        </p>
+      </section>
+
+      <!-- The Misconception -->
+      <section>
+        <h2>The Common Assumption</h2>
+        <p style="font-size: 1.3em; margin: 1em 0;">
+          "We'll get <span class="highlight">75% of the 2–3%</span> processing fee"
+        </p>
+        <div class="comparison fragment">
+          <div>
+            <div class="label">Expected Revenue</div>
+            <div class="big-number warning">$15–22<span class="unit">/per $1,000</span></div>
+          </div>
+        </div>
+        <p class="fragment" style="margin-top: 1.5em; font-size: 0.9em;">
+          This would be incredible. It's also not how it works.
+        </p>
+      </section>
+
+      <!-- Reality Check -->
+      <section>
+        <h2>The Reality</h2>
+        <div class="comparison">
+          <div>
+            <div class="label">What people assume</div>
+            <div class="big-number warning" style="opacity: 0.4; text-decoration: line-through;">$15–22</div>
+          </div>
+          <div>
+            <div class="label">What's actually available</div>
+            <div class="big-number">$2–4<span class="unit">/per $1,000</span></div>
+          </div>
+        </div>
+        <p style="margin-top: 1.5em;">
+          The 2–3% isn't one pool. It's <span class="highlight">three distinct layers</span>.
+        </p>
+      </section>
+
+      <!-- Fee Anatomy Title -->
+      <section>
+        <h2>Fee Anatomy</h2>
+        <p class="subtitle">Where the 2.5–2.8% actually goes</p>
+      </section>
+
+      <!-- Fee Breakdown Visual -->
+      <section>
+        <h2>On a $1,000 Transaction</h2>
+        <p style="font-size: 0.9em; color: #888; margin-bottom: 1em;">Total fee: ~$25–28 (2.5–2.8%)</p>
+        <div class="fee-stack">
+          <div class="fee-layer interchange fragment" data-fragment-index="1">
+            <div>
+              <div class="name" style="color: var(--danger);">Interchange</div>
+              <div class="small">Issuing bank (Chase, Amex, etc.)</div>
+            </div>
+            <div>
+              <div class="amount" style="color: var(--danger);">$19–21</div>
+              <div class="locked">🔒 Non-negotiable</div>
+            </div>
+          </div>
+          <div class="fee-layer assessments fragment" data-fragment-index="2">
+            <div>
+              <div class="name" style="color: var(--warning);">Network Assessments</div>
+              <div class="small">Visa / Mastercard rails</div>
+            </div>
+            <div>
+              <div class="amount" style="color: var(--warning);">$1.50–2</div>
+              <div class="locked">🔒 Non-negotiable</div>
+            </div>
+          </div>
+          <div class="fee-layer markup fragment" data-fragment-index="3">
+            <div>
+              <div class="name" style="color: var(--accent);">Processor Markup</div>
+              <div class="small">The only splittable pool</div>
+            </div>
+            <div>
+              <div class="amount" style="color: var(--accent);">$2.50–6</div>
+              <div class="locked" style="color: var(--accent);">✓ Revenue here</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Why Med Spas Pay More -->
+      <section>
+        <h2>Why Med Spas Pay Higher Interchange</h2>
+        <ul>
+          <li>Average ticket: $250–500 (high-value transactions)</li>
+          <li>Clientele skews toward premium rewards cards</li>
+          <li>Chase Sapphire, Amex Platinum = higher interchange</li>
+          <li>Elective procedures = no insurance rails</li>
+        </ul>
+        <p class="fragment" style="margin-top: 1em;">
+          Interchange: <span class="highlight">1.85–2.15%</span> vs retail average of 1.5–1.8%
+        </p>
+      </section>
+
+      <!-- Interpretation Math -->
+      <section>
+        <h2>"75% of 2–3%" — Which Interpretation?</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Interpretation</th>
+              <th>Math</th>
+              <th>Per $1,000</th>
+              <th>Reality</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="fragment">
+              <td>75% of total fee</td>
+              <td>75% × 2.7%</td>
+              <td class="warning">$20.25</td>
+              <td>❌ Impossible</td>
+            </tr>
+            <tr class="fragment">
+              <td>75% of markup (0.4%)</td>
+              <td>75% × 0.4%</td>
+              <td class="highlight">$3.00</td>
+              <td>✓ Typical</td>
+            </tr>
+            <tr class="fragment">
+              <td>75% of spread (0.6%)</td>
+              <td>75% × 0.6%</td>
+              <td class="highlight">$4.50</td>
+              <td>✓ Optimistic</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="fragment" style="margin-top: 1em; font-size: 1.1em;">
+          The difference is <span class="warning">5–7x in revenue</span>.
+        </p>
+      </section>
+
+      <!-- Integration Spectrum Title -->
+      <section>
+        <h2>The Integration Spectrum</h2>
+        <p class="subtitle">Five levels of payment integration</p>
+        <p style="margin-top: 1em;">
+          Higher levels = more revenue capture<br>
+          <span class="small">But also more compliance burden</span>
+        </p>
+      </section>
+
+      <!-- Level 1 -->
+      <section>
+        <div class="level-card">
+          <h3>Level 1: Gateway Integration</h3>
+          <p>"I hooked up Stripe/Square"</p>
+          <ul style="font-size: 0.85em;">
+            <li>Hosted checkout fields, basic receipts</li>
+            <li>Merchant has their own processor account</li>
+            <li>XiVara just passes transactions through</li>
+          </ul>
+          <div class="metrics">
+            <div class="metric">
+              <div class="value">$0</div>
+              <div class="label">Revenue/location</div>
+            </div>
+            <div class="metric">
+              <div class="value">SAQ-A</div>
+              <div class="label">PCI Scope</div>
+            </div>
+            <div class="metric">
+              <div class="value">Days</div>
+              <div class="label">Build Time</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Level 2 -->
+      <section>
+        <div class="level-card">
+          <h3>Level 2: ISO Path</h3>
+          <p>Wholesale pricing, own merchant relationships</p>
+          <ul style="font-size: 0.85em;">
+            <li>Settlement visibility and reporting</li>
+            <li>Merchants still board outside XiVara</li>
+            <li>Pricing control on markup only</li>
+          </ul>
+          <div class="metrics">
+            <div class="metric">
+              <div class="value">$40–100</div>
+              <div class="label">Revenue/location/mo</div>
+            </div>
+            <div class="metric">
+              <div class="value">SAQ-A</div>
+              <div class="label">PCI Scope</div>
+            </div>
+            <div class="metric">
+              <div class="value">1–2 mo</div>
+              <div class="label">Build Time</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Level 3 -->
+      <section>
+        <div class="level-card" style="border: 2px solid var(--accent);">
+          <h3>Level 3: Embedded Boarding <span class="rec">RECOMMENDED START</span></h3>
+          <p>Merchants onboard inside XiVara</p>
+          <ul style="font-size: 0.85em;">
+            <li>Branded boarding flow, integrated checkout</li>
+            <li>Per-location MID configuration</li>
+            <li>Full transaction lifecycle visibility</li>
+          </ul>
+          <div class="metrics">
+            <div class="metric">
+              <div class="value">$160–280</div>
+              <div class="label">Revenue/location/mo</div>
+            </div>
+            <div class="metric">
+              <div class="value">SAQ-A</div>
+              <div class="label">PCI Scope</div>
+            </div>
+            <div class="metric">
+              <div class="value">2–4 mo</div>
+              <div class="label">Build Time</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Level 4 -->
+      <section>
+        <div class="level-card">
+          <h3>Level 4: PFaaS (PayFac-as-a-Service)</h3>
+          <p>Pricing control, settlement timing, risk participation</p>
+          <ul style="font-size: 0.85em;">
+            <li>XiVara sets merchant rates</li>
+            <li>Partner handles network registration</li>
+            <li>Near-invisible partner to merchant</li>
+          </ul>
+          <div class="metrics">
+            <div class="metric">
+              <div class="value">$280–360</div>
+              <div class="label">Revenue/location/mo</div>
+            </div>
+            <div class="metric">
+              <div class="value">SAQ-A+</div>
+              <div class="label">PCI Scope</div>
+            </div>
+            <div class="metric">
+              <div class="value">4–8 mo</div>
+              <div class="label">Build Time</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Level 5 -->
+      <section>
+        <div class="level-card">
+          <h3>Level 5: Full PayFac</h3>
+          <p>Own card network registration</p>
+          <ul style="font-size: 0.85em;">
+            <li>$50K+ registration with Visa/MC</li>
+            <li>Dedicated compliance team required</li>
+            <li>Maximum control, maximum burden</li>
+          </ul>
+          <div class="metrics">
+            <div class="metric">
+              <div class="value">$360–400</div>
+              <div class="label">Revenue/location/mo</div>
+            </div>
+            <div class="metric">
+              <div class="value">Level 1</div>
+              <div class="label">PCI Scope</div>
+            </div>
+            <div class="metric">
+              <div class="value">6–12 mo</div>
+              <div class="label">Build Time</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Revenue Comparison -->
+      <section>
+        <h2>Revenue by Level</h2>
+        <p class="small">Per location @ $100K/month card volume</p>
+        <div style="max-width: 600px; margin: 1em auto;">
+          <div class="chart-bar">
+            <div class="label">L1</div>
+            <div class="bar" style="width: 50px; background: #444;">$0</div>
+          </div>
+          <div class="chart-bar">
+            <div class="label">L2</div>
+            <div class="bar" style="width: 100px;">$40–100</div>
+          </div>
+          <div class="chart-bar">
+            <div class="label">L3</div>
+            <div class="bar" style="width: 220px;">$160–280</div>
+          </div>
+          <div class="chart-bar">
+            <div class="label">L4</div>
+            <div class="bar" style="width: 320px;">$280–360</div>
+          </div>
+          <div class="chart-bar">
+            <div class="label">L5</div>
+            <div class="bar" style="width: 380px;">$360–400</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- At Scale -->
+      <section>
+        <h2>At Scale: 200 Locations</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Level</th>
+              <th>Monthly Rev</th>
+              <th>Annual Rev</th>
+              <th>% of Total*</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>L1: Gateway</td>
+              <td>$0</td>
+              <td>$0</td>
+              <td>0%</td>
+            </tr>
+            <tr>
+              <td>L2: ISO</td>
+              <td>$8K–20K</td>
+              <td>$96K–240K</td>
+              <td>12–25%</td>
+            </tr>
+            <tr style="background: rgba(110, 231, 183, 0.1);">
+              <td>L3: Embedded</td>
+              <td>$32K–56K</td>
+              <td>$384K–672K</td>
+              <td>35–48%</td>
+            </tr>
+            <tr>
+              <td>L4: PFaaS</td>
+              <td>$56K–72K</td>
+              <td>$672K–864K</td>
+              <td>48–55%</td>
+            </tr>
+            <tr>
+              <td>L5: Full PayFac</td>
+              <td>$72K–80K</td>
+              <td>$864K–960K</td>
+              <td>55–57%</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="small" style="margin-top: 1em;">*As % of total revenue assuming $300/mo SaaS fee</p>
+      </section>
+
+      <!-- Compliance Tradeoff -->
+      <section>
+        <h2>The Compliance Tradeoff</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Level</th>
+              <th>PCI Scope</th>
+              <th>Compliance Burden</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>L1–L3</td>
+              <td>SAQ-A</td>
+              <td>Minimal — hosted fields, no card data</td>
+            </tr>
+            <tr>
+              <td>L4</td>
+              <td>SAQ-A + Ops</td>
+              <td>Underwriting, monitoring, chargeback mgmt</td>
+            </tr>
+            <tr>
+              <td>L5</td>
+              <td>Level 1 DSS</td>
+              <td>Audits, dedicated team, reserve funds</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="fragment" style="margin-top: 1em;">
+          L3 → L4 is a <span class="highlight">business decision</span>, not an engineering project.<br>
+          <span class="small">The data model is the same.</span>
+        </p>
+      </section>
+
+      <!-- The Zero Rev Share Argument -->
+      <section>
+        <h2>Even at Zero Rev Share</h2>
+        <p class="subtitle">Why embedded payments is still the right call</p>
+        <ul>
+          <li><strong>Table stakes</strong> — Owners expect native payments</li>
+          <li><strong>Transaction data powers AI</strong> — Forecasting, pricing, LTV</li>
+          <li><strong>Financial visibility builds trust</strong> — Reduces churn</li>
+          <li><strong>Switching costs</strong> — Payment migration is disruptive</li>
+        </ul>
+      </section>
+
+      <!-- Key Questions -->
+      <section>
+        <h2>The Critical Question to Ask Partners</h2>
+        <div style="background: rgba(251, 191, 36, 0.15); border: 2px solid var(--warning); border-radius: 12px; padding: 1.5em; margin: 1em auto; max-width: 700px;">
+          <p style="font-size: 1.1em; margin: 0;">
+            "When you say 75% of 2–3%, is that 75% of the <span class="warning">gross fee</span>, 75% of the <span class="highlight">margin above interchange</span>, or 75% of a <span class="highlight">flat-rate spread</span>?"
+          </p>
+        </div>
+        <p class="fragment" style="margin-top: 1em;">
+          If they can't answer clearly, they don't understand their own model.
+        </p>
+      </section>
+
+      <!-- Summary -->
+      <section>
+        <h2>Summary</h2>
+        <ul>
+          <li><span class="danger">~85%</span> of the fee goes to banks & networks (locked)</li>
+          <li><span class="highlight">~15%</span> is processor markup (splittable)</li>
+          <li>Realistic revenue: <span class="highlight">$160–400/location/month</span></li>
+          <li>At 200 locations: <span class="highlight">$380K–960K/year</span> from processing</li>
+        </ul>
+        <p class="fragment" style="margin-top: 1.5em;">
+          <span class="rec">Start at L3. Architect for L4.</span>
+        </p>
+      </section>
+
+      <!-- End -->
+      <section>
+        <h1 style="font-size: 1.8em;">Questions?</h1>
+        <p style="margin-top: 2em; font-size: 0.9em; color: #666;">
+          <span class="xivara-logo">Xi<span>Vara</span></span>
+        </p>
+      </section>
+
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.1/dist/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      hash: true,
+      slideNumber: true,
+      transition: 'fade',
+      transitionSpeed: 'fast',
+      backgroundTransition: 'fade'
+    });
+  </script>
+</body>
+</html>
